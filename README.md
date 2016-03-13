@@ -2,7 +2,9 @@
 
 > Centralized package index for [SwiftPM](https://github.com/apple/swift-package-manager).
 
-The idea behind `swift-index` is that even centralized indices can be decentralized. This repo provides the necessary code to create a swift-index compatible server, which can in turn just be a proxy to another index (e.g. CocoaPods). Then, users will opt-in to particular centralized indices in their `Package.swift` manifest file (not yet implemented).
+The idea behind `swift-index` is that even centralized indices can be decentralized. This repo is a prototype of a swift-index compatible server. All it does is translating CocoaPods search APIs into a `swift-index` form. The idea is to create thin frontends to more package indices out there. Then, users would opt-in to particular centralized indices in their `Package.swift` manifest file (not yet implemented) and SwiftPM would only need to understand communication with a `swift-index` compatible server (whoever maintains it).
+
+(This is a WIP prototype only created to start a conversation around a centralized package index for SwiftPM. You're welcome to comment and hack away.)
 
 # Endpoints
 
@@ -40,7 +42,7 @@ returns
 ]
 ```
 
-At the moment, only `CocoaPodsAdapter` is implemented, so all results are coming from CocoaPods. The plan is to allow for aggregating packages from multiple sources.
+At the moment, only `CocoaPodsAdapter` is implemented, so all results are coming from CocoaPods. The plan is to allow  aggregating packages from multiple sources.
 
 :blue_heart: Code of Conduct
 ------------
