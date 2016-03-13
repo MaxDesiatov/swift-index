@@ -13,7 +13,7 @@ This prototype server is running on `https://swift-index.herokuapp.com`, and so 
 ## `/v1/packages?q=keyword`
 
 ```
-curl https://swift-index.herokuapp.com/v1/packages\?q\=alamofire
+curl https://swift-index.herokuapp.com/v1/packages?q=alamofire
 ```
 
 returns 
