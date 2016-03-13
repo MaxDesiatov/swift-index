@@ -11,26 +11,31 @@ import shared
 
 class PackageController: Controller {
     
-    required init() { }
+    let thirdPartyAdapters: [ThirdPartyIndexAdapter]
+    required init() {
+        self.thirdPartyAdapters = [
+            CocoaPodsAdapter()
+        ]
+    }
     
     func handle(request: Request) throws -> ResponseConvertible {
         
         //fetch results
-        let query = request.data.query["q"]
+        guard let query = request.data.query["q"] where !query.isEmpty else {
+            throw Abort.Custom(status: .BadRequest, message: "A query must be provided \"/packages?q=name\"")
+        }
         let results = try self.packages(query)
         
         //convert back to json
         let jsonResults = Json(try results.map { try $0.jsonRepresentation() })
-        let queryInfo = query != nil ? "for query \"\(query!)\"" : ""
+        let queryInfo = "for query \"\(query)\""
         Log.verbose("Returning \(results.count) results \(queryInfo)")
         return try Response(status: .OK, json: jsonResults)
     }
     
-    func packages(query: String? = nil) throws -> [PackageInfo] {
-        return [
-            PackageInfo(name: "Alamofire", origin: "https://github.com/Alamofire/Alamofire.git", version: "3.0.0"),
-            PackageInfo(name: "ReactiveCocoa", origin: "https://github.com/ReactiveCocoa/ReactiveCocoa.git", version: "4.0.1")
-        ]
+    func packages(query: String) throws -> [PackageInfo] {
+        
+        return try self.thirdPartyAdapters.flatMap { try $0.search(query) }
     }
     
 }
@@ -41,7 +46,8 @@ extension PackageInfo {
             [
                 "name": name,
                 "origin": origin,
-                "version": version
+                "version": version,
+                "sourceIndex": sourceIndex
             ]
         )
     }
