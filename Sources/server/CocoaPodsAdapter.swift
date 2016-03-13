@@ -23,6 +23,8 @@ struct CocoaPodsAdapter: ThirdPartyIndexAdapter {
     
     private func fetch(query: String) throws -> Json {
         
+        //FIXME: We need to filter only SwiftPM-compatible Pods, hopefully
+        //this will help: https://github.com/CocoaPods/search.cocoapods.org/issues/103
         let url = "http://search.cocoapods.org/api/v1/pods.flat.hash.json?query=\(query)&ids=10&offset=0&sort=quality"
         let response = try request(method: "GET", url: url)
         guard response.status == .Ok else {
