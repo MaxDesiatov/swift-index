@@ -35,7 +35,18 @@ class PackageController: Controller {
     
     func packages(query: String) throws -> [PackageInfo] {
         
-        return try self.thirdPartyAdapters.flatMap { try $0.search(query) }
+        //query each index for packages matching this query
+        let raw = try self.thirdPartyAdapters.flatMap { try $0.search(query) }
+        
+        //de-duplicate packages coming from multiple
+        //indices. origin git url should be enough to recognize duplicates.
+        var origins = Set<String>()
+        let deduplicated = raw.filter {
+            if origins.contains($0.origin) { return false }
+            origins.insert($0.origin)
+            return true
+        }
+        return deduplicated
     }
     
 }

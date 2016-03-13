@@ -44,6 +44,10 @@ returns
 
 At the moment, only `CocoaPodsAdapter` is implemented, so all results are coming from CocoaPods. The plan is to allow  aggregating packages from multiple sources.
 
+Technology Stack
+----------------
+This server is written in Swift, powered by [Vapor](https://github.com/qutheory/vapor) and the prototype runs on Heroku.
+
 :blue_heart: Code of Conduct
 ------------
 Please note that this project is released with a [Contributor Code of Conduct](./CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
