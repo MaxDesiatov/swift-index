@@ -1,0 +1,15 @@
+{
+  "name": "swift-index",
+  "scripts": {
+  },
+  "env": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/kylef/heroku-buildpack-swift.git"
+    }
+  ]
+}
