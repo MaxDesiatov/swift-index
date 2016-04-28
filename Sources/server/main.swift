@@ -2,25 +2,42 @@
 import Vapor
 import Environment
 
-// Prep
-let env = Environment()
-let app = Application()
+import HTTPSClient
 
-// Figure out config
-var port: Int = 8080
-if let envPort = env.getVar("PORT"), let envPortInt = Int(envPort) {
-    port = envPortInt
+do {
+    
+    let uri = URI(host:"honzadvorsky.com", port:443)
+    let path = "/"
+    
+    let client = try Client(uri: uri)
+    var response: Response = try client.get(path)
+    print("\(response)")
+    let buffer = try response.body.becomeBuffer()
+    print("\(buffer)")
+} catch let error {
+    print("\(error)")
 }
 
-// Route
 
-app.get("/") { _ in
-    return Response(status: .OK, text: "See docs: https://github.com/czechboy0/swift-index")
-}
-
-app.get("/v1/packages", handler: PackageController().handle)
-
-// Lift-off
-print("Starting server at port \(port)")
-app.start(port: port)
+//// Prep
+//let env = Environment()
+//let app = Application()
+//
+//// Figure out config
+//var port: Int = 8080
+//if let envPort = env.getVar("PORT"), let envPortInt = Int(envPort) {
+//    port = envPortInt
+//}
+//
+//// Route
+//
+//app.get("/") { _ in
+//    return Response(status: .ok, text: "See docs: https://github.com/czechboy0/swift-index")
+//}
+//
+//app.get("/v1/packages", handler: PackageController().handle)
+//
+//// Lift-off
+//print("Starting server at port \(port)")
+//app.start(port: port)
 

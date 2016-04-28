@@ -10,5 +10,5 @@ import shared
 
 protocol ThirdPartyIndexAdapter {
     var name: String { get }
-    func search(query: String) throws -> [PackageInfo]
+    func search(_ query: String) throws -> [PackageInfo]
 }

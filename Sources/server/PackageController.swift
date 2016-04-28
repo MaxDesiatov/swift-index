@@ -9,7 +9,7 @@
 import Vapor
 import shared
 
-class PackageController: Controller {
+class PackageController {
     
     let thirdPartyAdapters: [ThirdPartyIndexAdapter]
     required init() {
@@ -18,22 +18,22 @@ class PackageController: Controller {
         ]
     }
     
-    func handle(request: Request) throws -> ResponseConvertible {
+    func handle(request: Request) throws -> ResponseRepresentable {
         
         //fetch results
         guard let query = request.data.query["q"] where !query.isEmpty else {
-            throw Abort.Custom(status: .BadRequest, message: "A query must be provided \"/packages?q=name\"")
+            throw Abort.custom(status: .badRequest, message: "A query must be provided \"/packages?q=name\"")
         }
         let results = try self.packages(query)
         
         //convert back to json
-        let jsonResults = Json(try results.map { try $0.jsonRepresentation() })
+        let jsonResults = Json.array(try results.map { try $0.jsonRepresentation() })
         let queryInfo = "for query \"\(query)\""
         Log.verbose("Returning \(results.count) results \(queryInfo)")
-        return try Response(status: .OK, json: jsonResults)
+        return Response(status: .ok, json: jsonResults)
     }
     
-    func packages(query: String) throws -> [PackageInfo] {
+    func packages(_ query: String) throws -> [PackageInfo] {
         
         //query each index for packages matching this query
         let raw = try self.thirdPartyAdapters.flatMap { try $0.search(query) }
@@ -53,7 +53,7 @@ class PackageController: Controller {
 
 extension PackageInfo {
     func jsonRepresentation() throws -> Json {
-        return try Json(
+        return Json(
             [
                 "name": name,
                 "origin": origin,
