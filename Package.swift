@@ -10,7 +10,7 @@ let package = Package(
     dependencies: [
                       
         // Server
-    	.Package(url: "https://github.com/czechboy0/vapor.git", majorVersion: 0, minor: 7),
+    	.Package(url: "https://github.com/qutheory/vapor.git", majorVersion: 0, minor: 7),
     	// .Package(url: "https://github.com/qutheory/vapor-zewo-server.git", majorVersion: 0),
 
         // HTTP utils

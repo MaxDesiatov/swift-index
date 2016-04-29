@@ -1,19 +1,18 @@
 
 import Vapor
 import Environment
-
 import HTTPSClient
 
 do {
     
-    let uri = URI(host:"honzadvorsky.com", port:443)
+    let uri = URI(host:"https://fastlane.tools", port:443)
     let path = "/"
     
     let client = try Client(uri: uri)
     var response: Response = try client.get(path)
-    print("\(response)")
-    let buffer = try response.body.becomeBuffer()
-    print("\(buffer)")
+    print("\(response.status)")
+//    let buffer = try response.body.becomeBuffer()
+    //print("\(buffer)")
 } catch let error {
     print("\(error)")
 }
