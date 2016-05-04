@@ -16,7 +16,7 @@ if let envPort = env.getVar("PORT"), let envPortInt = Int(envPort) {
 // Route
 
 app.get("/") { _ in
-    return Response(status: .ok, text: "See docs: https://github.com/czechboy0/swift-index")
+    return Response(status: .ok, html: "<html><body><h1>Docs at <a href=\"https://github.com/czechboy0/swift-index#swift-index\">https://github.com/czechboy0/swift-index</a></h1></body></html>")
 }
 
 app.get("/v1/packages", handler: PackageController().handle)
