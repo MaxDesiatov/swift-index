@@ -59,6 +59,7 @@ extension PackageInfo {
             [
                 "name": name,
                 "origin": origin,
+                "description": description,
                 "version": version ?? "",
                 "sourceIndex": sourceIndex
             ]

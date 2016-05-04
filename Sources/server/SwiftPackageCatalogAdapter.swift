@@ -48,18 +48,15 @@ struct SwiftPackageCatalogAdapter: ThirdPartyIndexAdapter {
             throw Abort.custom(status: .internalServerError, message: "\(self.name) server returned an invalid result array")
         }
         
-        let preprocessed: [(String, String, String?)] = array
+        let results: [PackageInfo] = array
             .flatMap { $0.dictionary }
             .flatMap { rawObj in
                 guard let obj = rawObj["_source"]?.dictionary else { return nil }
                 guard let id = obj["package_name"]?.string else { return nil }
                 guard let origin = obj["git_clone_url"]?.string else { return nil }
-//                guard let version = source["tag"]?.string else { return nil }
+                guard let description = obj["description"]?.string else { return nil }
                 //No version? :/
-                return (id, origin, nil)
-        }
-        let results = preprocessed.map {
-            PackageInfo(name: $0.0, origin: $0.1, version: $0.2, sourceIndex: indexName)
+                return PackageInfo(name: id, origin: origin, description: description, version: nil, sourceIndex: name)
         }
         return results
     }

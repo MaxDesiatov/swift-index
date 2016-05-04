@@ -46,18 +46,16 @@ struct CocoaPodsAdapter: ThirdPartyIndexAdapter {
         }
         let indexName = self.name
 
-        let preprocessed: [(String, String, String)] = array
+        let results: [PackageInfo] = array
             .flatMap { $0.dictionary }
             .flatMap { obj in
                 guard let id = obj["id"]?.string else { return nil }
                 guard let source = obj["source"]?.dictionary else { return nil }
                 guard let origin = source["git"]?.string else { return nil }
+                guard let description = obj["summary"]?.string else { return nil }
                 guard let version = source["tag"]?.string else { return nil }
-                return (id, origin, version)
+                return PackageInfo(name: id, origin: origin, description: description, version: version, sourceIndex: indexName)
             }
-        let results = preprocessed.map {
-            PackageInfo(name: $0.0, origin: $0.1, version: $0.2, sourceIndex: indexName)
-        }
         return results
     }
 }
