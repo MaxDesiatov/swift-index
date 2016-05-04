@@ -28,7 +28,7 @@ struct CocoaPodsAdapter: ThirdPartyIndexAdapter {
         //this will help: https://github.com/CocoaPods/search.cocoapods.org/issues/103
         
         let uri = URI(scheme: "https", host:"search.cocoapods.org", port:443)
-        let path = "/api/v1/pods.flat.hash.json?query=\(query)&ids=10&offset=0&sort=quality"
+        let path = "/api/v1/pods.flat.hash.json?query=\(query)&ids=5&offset=0&sort=quality"
         let client = try Client(uri: uri)
         var response : Response = try client.get(path)
         guard response.status == .ok else {

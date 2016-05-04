@@ -14,6 +14,7 @@ class PackageController {
     let thirdPartyAdapters: [ThirdPartyIndexAdapter]
     required init() {
         self.thirdPartyAdapters = [
+            SwiftPackageCatalogAdapter(),
             CocoaPodsAdapter()
         ]
     }
@@ -58,7 +59,7 @@ extension PackageInfo {
             [
                 "name": name,
                 "origin": origin,
-                "version": version,
+                "version": version ?? "",
                 "sourceIndex": sourceIndex
             ]
         )
