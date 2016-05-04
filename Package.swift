@@ -14,7 +14,10 @@ let package = Package(
     	// .Package(url: "https://github.com/qutheory/vapor-zewo-server.git", majorVersion: 0),
 
         // HTTP utils
-        .Package(url: "https://github.com/VeniceX/HTTPSClient.git", majorVersion: 0, minor: 5),
+        .Package(url: "https://github.com/VeniceX/HTTPSClient.git", majorVersion: 0, minor: 6),
+
+        // XML
+        .Package(url: "https://github.com/Zewo/XML.git", majorVersion: 0, minor: 6),
     	
     	// CLI utils
     	.Package(url: "https://github.com/czechboy0/Environment.git", majorVersion: 0, minor: 3)

@@ -42,8 +42,9 @@ class PackageController {
         //indices. origin git url should be enough to recognize duplicates.
         var origins = Set<String>()
         let deduplicated = raw.filter {
-            if origins.contains($0.origin) { return false }
-            origins.insert($0.origin)
+            let orig = $0.origin.lowercased() //assume case insensitive
+            if origins.contains(orig) { return false }
+            origins.insert(orig)
             return true
         }
         return deduplicated
