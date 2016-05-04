@@ -9,7 +9,7 @@
   ],
   "buildpacks": [
     {
-      "url": "https://github.com/kylef/heroku-buildpack-swift.git"
+      "url": "https://github.com/czechboy0/heroku-buildpack-swift.git"
     }
   ]
 }
