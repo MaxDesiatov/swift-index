@@ -1,6 +1,7 @@
 
 import Vapor
 import Environment
+import HTTPSClient
 
 // Prep
 let env = Environment()
@@ -15,7 +16,7 @@ if let envPort = env.getVar("PORT"), let envPortInt = Int(envPort) {
 // Route
 
 app.get("/") { _ in
-    return Response(status: .OK, text: "See docs: https://github.com/czechboy0/swift-index")
+    return Response(status: .ok, text: "See docs: https://github.com/czechboy0/swift-index")
 }
 
 app.get("/v1/packages", handler: PackageController().handle)
