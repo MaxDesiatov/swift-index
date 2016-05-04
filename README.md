@@ -2,7 +2,7 @@
 
 > Centralized package index for [SwiftPM](https://github.com/apple/swift-package-manager).
 
-The idea behind `swift-index` is that even centralized indices can be decentralized. This repo is a prototype of a swift-index compatible server. All it does is translating CocoaPods search APIs into a `swift-index` form. The idea is to create thin frontends to more package indices out there. Then, users would opt-in to particular centralized indices in their `Package.swift` manifest file (not yet implemented) and SwiftPM would only need to understand communication with a `swift-index` compatible server (whoever maintains it).
+The idea behind `swift-index` is that even centralized indices can be decentralized. This repo is a prototype of a swift-index compatible server. All it does is translating other centralized search APIs (CocoaPods, Swift Package Catalog) into a `swift-index` form. The idea is to create thin frontends to more package indices out there. Then, users would opt-in to particular centralized indices in their `Package.swift` manifest file (not yet implemented) and SwiftPM would only need to understand communication with a `swift-index` compatible server (whoever maintains it).
 
 (This is a WIP prototype only created to start a conversation around a centralized package index for SwiftPM. You're welcome to comment and hack away.)
 
@@ -13,7 +13,7 @@ This prototype server is running on `https://swift-index.herokuapp.com`, and so 
 ## `/v1/packages?q=keyword`
 
 ```
-curl https://swift-index.herokuapp.com/v1/packages?q=alamofire
+curl https://swift-index.herokuapp.com/v1/packages?q=json
 ```
 
 returns 
@@ -21,28 +21,33 @@ returns
 ```json
 [
     {
-        "name": "Alamofire",
-        "origin": "https://github.com/Alamofire/Alamofire.git",
-        "sourceIndex": "CocoaPods",
-        "version": "3.2.1"
+        "description": "Swift implementation of JSON Web Token (JWT).",
+        "name": "JSONWebToken.swift",
+        "origin": "https://github.com/kylef/JSONWebToken.swift.git",
+        "sourceIndex": "Swift Package Catalog",
+        "version": ""
     },
     {
-        "name": "AlamofireImage",
-        "origin": "https://github.com/Alamofire/AlamofireImage.git",
-        "sourceIndex": "CocoaPods",
-        "version": "2.3.1"
+        "description": "JSON (RFC 7159)",
+        "name": "JSON",
+        "origin": "https://github.com/Zewo/JSON.git",
+        "sourceIndex": "Swift Package Catalog",
+        "version": ""
     },
     {
-        "name": "AlamofireDomain",
-        "origin": "https://github.com/tonyli508/AlamofireDomain.git",
+        "description": "Magical Data Modelling Framework for JSON. Create rapidly powerful, atomic and smart data model classes.",
+        "name": "JSONModel",
+        "origin": "https://github.com/icanzilb/JSONModel.git",
         "sourceIndex": "CocoaPods",
-        "version": "2.1.0"
+        "version": "1.2.0"
     },
     ...
 ]
 ```
 
-At the moment, only `CocoaPodsAdapter` is implemented, so all results are coming from CocoaPods. The plan is to allow  aggregating packages from multiple sources.
+# Source Package Indices
+- CocoaPods
+- Swift Package Catalog
 
 Technology Stack
 ----------------
