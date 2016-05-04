@@ -42,7 +42,6 @@ struct SwiftPackageCatalogAdapter: ThirdPartyIndexAdapter {
         guard let dict = raw.dictionary else {
             throw Abort.custom(status: .internalServerError, message: "\(self.name) server returned an invalid result")
         }
-        let indexName = self.name
         
         guard let array = dict["data"]?.dictionary?["hits"]?.dictionary?["hits"]?.array else {
             throw Abort.custom(status: .internalServerError, message: "\(self.name) server returned an invalid result array")
