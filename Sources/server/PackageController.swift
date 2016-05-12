@@ -14,6 +14,7 @@ class PackageController {
     let thirdPartyAdapters: [ThirdPartyIndexAdapter]
     required init() {
         self.thirdPartyAdapters = [
+            SwiftModulesAdapter(),
             SwiftPackageCatalogAdapter(),
             CocoaPodsAdapter()
         ]
