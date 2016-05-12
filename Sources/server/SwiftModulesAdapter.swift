@@ -30,7 +30,7 @@ struct SwiftModulesAdapter: ThirdPartyIndexAdapter {
         let client = try Client(uri: uri)
         var response : Response = try client.get(path)
         guard response.status == .ok else {
-            throw Abort.custom(status: .internalServerError, message: "Failed to contact CocoaPods server")
+            throw Abort.custom(status: .internalServerError, message: "Failed to contact \(name) server")
         }
         let data = try response.body.becomeBuffer()
         let json = try JSONParser().parse(data: data)
