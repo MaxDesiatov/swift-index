@@ -2,7 +2,7 @@
 
 > Centralized package index for [SwiftPM](https://github.com/apple/swift-package-manager).
 
-The idea behind `swift-index` is that even centralized indices can be decentralized. This repo is a prototype of a swift-index compatible server. All it does is translating other centralized search APIs (CocoaPods, Swift Package Catalog) into a `swift-index` form. The idea is to create thin frontends to more package indices out there. Then, users would opt-in to particular centralized indices in their `Package.swift` manifest file (not yet implemented) and SwiftPM would only need to understand communication with a `swift-index` compatible server (whoever maintains it).
+The idea behind `swift-index` is that even centralized indices can be decentralized. This repo is a prototype of a swift-index compatible server. All it does is translating other centralized search APIs (CocoaPods, Swift Package Catalog, SwiftModules) into a `swift-index` form. The idea is to create thin frontends to more package indices out there. Then, users would opt-in to particular centralized indices in their `Package.swift` manifest file (not yet implemented) and SwiftPM would only need to understand communication with a `swift-index` compatible server (whoever maintains it).
 
 (This is a WIP prototype only created to start a conversation around a centralized package index for SwiftPM. You're welcome to comment and hack away.)
 
@@ -31,7 +31,7 @@ returns
         "description": "JSON (RFC 7159)",
         "name": "JSON",
         "origin": "https://github.com/Zewo/JSON.git",
-        "sourceIndex": "Swift Package Catalog",
+        "sourceIndex": "Swift Modules",
         "version": ""
     },
     {
@@ -46,8 +46,9 @@ returns
 ```
 
 # Source Package Indices
-- CocoaPods
-- Swift Package Catalog
+- [Swift Package Catalog](https://swiftpkgs.ng.bluemix.net)
+- [Swift Modules](https://swiftmodules.com)
+- [CocoaPods](https://cocoapods.org)
 
 Technology Stack
 ----------------
