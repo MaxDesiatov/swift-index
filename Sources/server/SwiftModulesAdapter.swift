@@ -23,10 +23,10 @@ struct SwiftModulesAdapter: ThirdPartyIndexAdapter {
     }
     
     private func fetch(_ query: String) throws -> JSON {
-        //https://swiftpkgs.ng.bluemix.net/api/search/jay?page=1&items=13
+        //Sample search url: https://swiftmodules.com/es/_search?q=query&size=5
         
         let uri = URI(scheme: "https", host:"swiftmodules.com", port:443)
-        let path = "/es/_search?q=\(query)"
+        let path = "/es/_search?q=\(query)&size=5"
         let client = try Client(uri: uri)
         var response : Response = try client.get(path)
         guard response.status == .ok else {
