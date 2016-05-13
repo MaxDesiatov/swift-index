@@ -15,6 +15,7 @@ class PackageController {
     required init() {
         self.thirdPartyAdapters = [
             SwiftPackageCatalogAdapter(),
+            SwiftModulesAdapter(),
             CocoaPodsAdapter()
         ]
     }
